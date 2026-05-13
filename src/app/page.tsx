@@ -86,7 +86,7 @@ export default function Home() {
           </span>
           <span style={{ color: '#333' }}>|</span>
           <span className="flex items-center gap-2">
-            <span>📍</span> South Africa
+            <span>📍</span>Gauteng, South Africa
           </span>
           <span style={{ color: '#333' }}>|</span>
           <a
