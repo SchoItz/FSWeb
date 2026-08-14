@@ -41,22 +41,7 @@ const personalRepos: Repo[] = [
     tags: ['Python', 'Automation', 'Utilities'],
     url: 'https://github.com/SchoItz/Kit',
   },
-  {
-    name: 'D-S',
-    owner: 'SchoItz',
-    description:
-      'Unity 3D game project with custom C# gameplay systems, physics interactions, and level design.',
-    tags: ['Unity', 'C#', 'Game Dev', '3D'],
-    url: 'https://github.com/SchoItz/D-S',
-  },
-  {
-    name: 'GameTest',
-    owner: 'SchoItz',
-    description:
-      'Unity game prototype environment for testing mechanics, systems, and gameplay concepts.',
-    tags: ['Unity', 'C#', 'Prototype'],
-    url: 'https://github.com/SchoItz/GameTest',
-  },
+
   {
     name: 'FSWeb',
     owner: 'SchoItz',
