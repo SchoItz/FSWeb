@@ -7,34 +7,47 @@ interface Repo {
   description: string;
   tags: string[];
   url: string;
+  private?: boolean;
 }
 
 // Edit src/data/projects.json to choose which projects appear.
 // Set "show": false to hide one; the order in the file is the order on the page.
+// "private": true shows the card without a link (visitors can't open private repos).
 const visible = (projects as (Repo & { group: string; show: boolean })[]).filter((p) => p.show);
 const personalRepos = visible.filter((p) => p.group === 'personal');
 const collaborativeRepos = visible.filter((p) => p.group === 'collaborative');
 
 function RepoCard({ repo }: { repo: Repo }) {
+  const Card = repo.private ? 'div' : 'a';
+  const linkProps = repo.private
+    ? {}
+    : { href: repo.url, target: '_blank', rel: 'noopener noreferrer' };
   return (
-    <a
-      href={repo.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex flex-col rounded-lg border p-5 transition-all hover:border-[#c9a22760]"
+    <Card
+      {...linkProps}
+      className={`group flex flex-col rounded-lg border p-5 transition-all ${repo.private ? '' : 'hover:border-[#c9a22760]'}`}
       style={{ backgroundColor: '#252525', borderColor: '#333333' }}
     >
       {/* Repo name */}
       <div className="flex items-start justify-between gap-2 mb-1">
         <h3
-          className="text-base font-semibold transition-colors group-hover:text-[#c9a227]"
+          className={`text-base font-semibold transition-colors ${repo.private ? '' : 'group-hover:text-[#c9a227]'}`}
           style={{ color: '#e0e0e0' }}
         >
           {repo.name}
         </h3>
-        <span className="text-base opacity-40 group-hover:opacity-80 transition-opacity" style={{ color: '#c9a227' }}>
-          ↗
-        </span>
+        {repo.private ? (
+          <span
+            className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded whitespace-nowrap"
+            style={{ border: '1px solid #3a3a3a', color: '#777777' }}
+          >
+            Private repository
+          </span>
+        ) : (
+          <span className="text-base opacity-40 group-hover:opacity-80 transition-opacity" style={{ color: '#c9a227' }}>
+            ↗
+          </span>
+        )}
       </div>
       <p className="text-xs mb-3" style={{ color: '#666666' }}>
         {repo.owner}
@@ -57,7 +70,7 @@ function RepoCard({ repo }: { repo: Repo }) {
           </span>
         ))}
       </div>
-    </a>
+    </Card>
   );
 }
 

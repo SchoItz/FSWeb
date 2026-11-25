@@ -1,6 +1,7 @@
 // Keeps src/data/projects.json in line with GitHub:
 //   - public repos of USER that aren't listed yet are added with "show": true
-//   - any listed repo that isn't public (private, renamed or deleted) is set to "show": false
+//   - your own listed repos that aren't public (private, renamed or deleted) are set to "show": false
+//   - team ("collaborative") repos stay listed; "private": true makes them show without a link
 // A public repo you hide by hand stays hidden.
 //
 // Usage: npm run projects:sync   (add --show-all-public to switch every public repo back on)
@@ -55,6 +56,11 @@ const hidden = [];
 const shown = [];
 for (const p of projects) {
   const pub = await isPublic(p);
+  if (p.group === 'collaborative') {
+    // Team repos stay listed either way; private ones are shown without a link.
+    p.private = !pub;
+    continue;
+  }
   if (!pub && p.show) {
     p.show = false;
     hidden.push(p.name);
