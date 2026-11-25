@@ -1,4 +1,11 @@
 import Link from 'next/link';
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+
+const LINKEDIN_URL = 'https://www.linkedin.com/in/francois-scholtz-04696b176/';
+
+// Drop your photo at public/profile.jpg; until then the hero shows your initials.
+const hasPhoto = existsSync(path.join(process.cwd(), 'public', 'profile.jpg'));
 
 const programmingSkills = [
   { name: 'Java', level: 'Proficient' },
@@ -50,6 +57,32 @@ export default function Home() {
             'linear-gradient(180deg, #111111 0%, #1a1a1a 60%, #1a1a1a 100%)',
         }}
       >
+        <a
+          href={LINKEDIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Francois Scholtz on LinkedIn"
+          className="mb-8 rounded-full p-1 transition-transform hover:scale-105"
+          style={{ border: '2px solid #c9a227' }}
+        >
+          {hasPhoto ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src="/profile.jpg"
+              alt="Francois Scholtz"
+              width={144}
+              height={144}
+              className="w-36 h-36 rounded-full object-cover"
+            />
+          ) : (
+            <span
+              className="w-36 h-36 rounded-full flex items-center justify-center text-4xl font-bold"
+              style={{ backgroundColor: '#252525', color: '#c9a227' }}
+            >
+              FS
+            </span>
+          )}
+        </a>
         <p className="text-sm uppercase tracking-[0.25em] mb-4" style={{ color: '#888888' }}>
           Portfolio
         </p>
@@ -96,6 +129,16 @@ export default function Home() {
             className="flex items-center gap-2 transition-colors hover:text-[#c9a227]"
           >
             <span>⌨</span> github.com/SchoItz
+          </a>
+          <span style={{ color: '#333' }}>|</span>
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 transition-colors hover:text-[#c9a227]"
+          >
+            <span className="text-xs font-bold px-1 rounded-sm" style={{ border: '1px solid currentColor' }}>in</span>
+            LinkedIn
           </a>
         </div>
       </section>

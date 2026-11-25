@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import projects from '@/data/projects.json';
 
 interface Repo {
   name: string;
@@ -8,108 +9,11 @@ interface Repo {
   url: string;
 }
 
-const personalRepos: Repo[] = [
-  {
-    name: 'StockTrader',
-    owner: 'SchoItz',
-    description:
-      'Full-stack stock and forex trading application with a React front-end, Node.js API, Python trading engine, and Docker deployment.',
-    tags: ['React', 'Node.js', 'Python', 'Docker', 'Forex API'],
-    url: 'https://github.com/SchoItz/StockTrader',
-  },
-  {
-    name: 'LFSPhtograpghy',
-    owner: 'SchoItz',
-    description:
-      'Photography portfolio and gallery website built to showcase professional photography work.',
-    tags: ['Next.js', 'Tailwind CSS', 'Web'],
-    url: 'https://github.com/SchoItz/LFSPhtograpghy',
-  },
-  {
-    name: 'COS730ASS2',
-    owner: 'SchoItz',
-    description:
-      'Academic benchmarking study comparing original and optimised algorithm implementations, with detailed performance analysis and reports.',
-    tags: ['Python', 'Benchmarking', 'Algorithms', 'Research'],
-    url: 'https://github.com/SchoItz/COS730ASS2',
-  },
-  {
-    name: 'Kit',
-    owner: 'SchoItz',
-    description:
-      'Python utility toolkit providing automation scripts and general-purpose helper utilities.',
-    tags: ['Python', 'Automation', 'Utilities'],
-    url: 'https://github.com/SchoItz/Kit',
-  },
-
-  {
-    name: 'FSWeb',
-    owner: 'SchoItz',
-    description:
-      'This portfolio website — built with Next.js, TypeScript, and Tailwind CSS to showcase skills and experience.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Portfolio'],
-    url: 'https://github.com/SchoItz/FSWeb',
-  },
-];
-
-const collaborativeRepos: Repo[] = [
-  {
-    name: 'spysx-backend',
-    owner: 'OnlyCode-Capstone',
-    description:
-      'RESTful API backend for the SpySX intelligence platform, built with Node.js and Supabase with structured route architecture.',
-    tags: ['Node.js', 'Supabase', 'REST API', 'Capstone'],
-    url: 'https://github.com/OnlyCode-Capstone/spysx-backend',
-  },
-  {
-    name: 'spysx-frontend-web',
-    owner: 'OnlyCode-Capstone',
-    description:
-      'Web frontend for the SpySX platform, delivering a responsive UI for the intelligence and monitoring application.',
-    tags: ['React', 'Web', 'Capstone'],
-    url: 'https://github.com/OnlyCode-Capstone/spysx-frontend-web',
-  },
-  {
-    name: 'spysx-frontend-mobile-app',
-    owner: 'OnlyCode-Capstone',
-    description:
-      'Cross-platform mobile application for SpySX built with Flutter, targeting iOS and Android.',
-    tags: ['Flutter', 'Dart', 'Mobile', 'iOS', 'Android'],
-    url: 'https://github.com/OnlyCode-Capstone/spysx-frontend-mobile-app',
-  },
-  {
-    name: 'NSARG_Projek-Frontend',
-    owner: 'NSARG-Boys',
-    description:
-      'Frontend for the NSARG group project — a collaborative university software engineering assignment.',
-    tags: ['Frontend', 'Team Project'],
-    url: 'https://github.com/NSARG-Boys/NSARG_Projek-Frontend',
-  },
-  {
-    name: 'NSARG_Projek-Backend',
-    owner: 'NSARG-Boys',
-    description:
-      'Backend API for the NSARG group project, handling data management and server-side logic.',
-    tags: ['Backend', 'API', 'Team Project'],
-    url: 'https://github.com/NSARG-Boys/NSARG_Projek-Backend',
-  },
-  {
-    name: 'takeazon',
-    owner: 'galenmyburgh',
-    description:
-      'E-commerce client application with product browsing, cart management, and order flow.',
-    tags: ['React', 'E-commerce', 'Collaborative'],
-    url: 'https://github.com/galenmyburgh/takeazon',
-  },
-  {
-    name: 'takeazon-server',
-    owner: 'galenmyburgh',
-    description:
-      'Express.js server powering the Takeazon e-commerce platform with RESTful endpoints and database integration.',
-    tags: ['Node.js', 'Express', 'REST API'],
-    url: 'https://github.com/galenmyburgh/takeazon-server',
-  },
-];
+// Edit src/data/projects.json to choose which projects appear.
+// Set "show": false to hide one; the order in the file is the order on the page.
+const visible = (projects as (Repo & { group: string; show: boolean })[]).filter((p) => p.show);
+const personalRepos = visible.filter((p) => p.group === 'personal');
+const collaborativeRepos = visible.filter((p) => p.group === 'collaborative');
 
 function RepoCard({ repo }: { repo: Repo }) {
   return (
