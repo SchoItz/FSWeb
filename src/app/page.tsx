@@ -73,6 +73,7 @@ export default function Home() {
               width={144}
               height={144}
               className="w-36 h-36 rounded-full object-cover"
+              style={{ objectPosition: '50% 15%' }}
             />
           ) : (
             <span
