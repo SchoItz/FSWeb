@@ -100,7 +100,8 @@ export default function GithubPage() {
         </div>
       </section>
 
-      {/* Collaborative */}
+      {/* Collaborative (only shown when at least one team repo is public) */}
+      {collaborativeRepos.length > 0 && (
       <section>
         <h2 className="text-xs uppercase tracking-[0.2em] mb-6" style={{ color: '#c9a227' }}>
           Collaborative &amp; Team Projects
@@ -111,6 +112,7 @@ export default function GithubPage() {
           ))}
         </div>
       </section>
+      )}
 
       {/* Back nav */}
       <div className="mt-16 pt-8 border-t flex items-center justify-between" style={{ borderColor: '#2a2a2a' }}>
